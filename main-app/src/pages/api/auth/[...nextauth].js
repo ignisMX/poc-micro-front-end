@@ -1,6 +1,6 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import request from "@services/api";
+import request from "../../../services/api";
 export const authOptions = {
   secret: process.env.JWT_SECRET,
   session: {
