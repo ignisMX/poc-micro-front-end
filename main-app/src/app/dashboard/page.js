@@ -1,6 +1,18 @@
 "use client";
-import { useSession } from "next-auth/react";
+
+import { useState } from "react";
+import { findAllItemsAsPage } from "../../services/api-service";
 export default function Dashboard({}) {
-  const { data: session, status } = useSession();
-  return <h1>dashboard inside of app {status}</h1>;
+  const [items, setItems] = useState({});
+  const getAllItems = async () => {
+    const response = await findAllItemsAsPage();
+    setItems(response);
+  };
+
+  return (
+    <div>
+      {items && JSON.stringify(items)}
+      <button onClick={getAllItems}> Obtener items</button>
+    </div>
+  );
 }
