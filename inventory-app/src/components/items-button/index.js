@@ -9,7 +9,7 @@ export default function Dashboard({ getItems }) {
 
   return (
     <div>
-      {items && JSON.stringify(items)}
+      {items && JSON.stringify(items)} <br />
       <button onClick={getAllItems}> Obtener items</button>
     </div>
   );
