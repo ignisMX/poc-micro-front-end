@@ -11,6 +11,7 @@ const apiGet = async (url) => {
   }
   return body;
 };
+
 const apiAuthPost = async (url, credentials, body) => {
   const options = buildAuthOptions(credentials, body);
   const response = await fetch(url, options);
