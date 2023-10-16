@@ -1,34 +1,21 @@
-import dynamic from "next/dynamic";
-const ItemsButton = dynamic(() => import("users/ItemsButton"));
+"use client";
 import { findAllItemsAsPage } from "../../services/api-service";
 
-import React, { lazy, useState } from "react";
-let RemoteTitle = () => null;
+import React, { lazy, useState, useEffect } from "react";
+let RemoteItemsButton = () => null;
 if (process.browser) {
-  RemoteTitle = lazy(
-    () => {
-      return import("users/ItemsButton");
-    },
-    { ssr: false }
-  );
+  RemoteItemsButton = lazy(() => {
+    return import("users/ItemsButton");
+  });
 }
 
 export default function Items(props) {
-  const [enable, setEnable] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
   const itemsProps = {
     getItems: findAllItemsAsPage,
   };
-  return (
-    <div>
-      <button
-        onClick={() => {
-          setEnable(true);
-        }}
-      >
-        Habilitar
-      </button>
-      {/* <ItemsButton {...itemsProps} /> */}
-      {enable && <ItemsButton {...itemsProps} />}
-    </div>
-  );
+  return <div>{loaded && <RemoteItemsButton {...itemsProps} />}</div>;
 }
