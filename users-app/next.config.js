@@ -9,7 +9,7 @@ const nextConfig = {
         name: "users",
         filename: "static/chunks/remoteEntry.js",
         exposes: {
-          "./ItemsButton": "./src/components/ItemsButton",
+          "./ItemsButton": "./src/components/ItemsButton.jsx",
         },
       })
     );
